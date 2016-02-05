@@ -1,0 +1,24 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: rsvp_development
+  pool: 5
+  username: postgres
+  password: xxh@x0R5
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: rsvp_test
+  pool: 5
+  username: postgres
+  password: xxh@x0R5
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: rsvp_production
+  pool: 5
+  username: postgres
+  password: xxh@x0R5
+

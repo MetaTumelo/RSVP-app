@@ -1,0 +1,6 @@
+    <tr>
+      <td><%= t guest.status.class %></td>
+      <td><%= guest.name %></td>
+      <td><%= guest.message %></td>
+      <td><%= link_to 'Delete', guest_path(guest), method: :delete, data: { confirm: 'Are you sure?'} %></td>
+    </tr>

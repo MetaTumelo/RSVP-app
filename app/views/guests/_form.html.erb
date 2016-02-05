@@ -1,0 +1,18 @@
+<%= simple_form_for @guest_form do |f| %>
+<div class="field">
+  <%= f.input :status, as: :radio_buttons %>
+  <%= f.input :name %>
+</div>
+
+
+<%= f.simple_fields_for :plusone do |plusone_fields| %>
+  <%= render "plusone_fields", :f => plusone_fields %>
+<% end %>
+
+<div class="field">
+  <%= f.input :message %>
+</div>
+<div class="actions">
+  <%= f.button :submit %>
+</div>
+<% end %>

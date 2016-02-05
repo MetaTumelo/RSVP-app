@@ -1,0 +1,121 @@
+ <div class="col-md-2 col-md-offset-4">
+    <%= link_to 'New Guest', new_guest_path, id: "new_link", remote: true, class: "btn btn-default" %>
+  </div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-2" id="guest-form" style="display:none;"></div>
+</div>
+
+<div class="col-md-12">
+
+  <div class="well">Hello! You can now Rsvp!</div>
+</div>
+<table class="table" id="guest-table">
+  <thead>
+    <tr>
+      <th>Attendance</th>
+      <th>Name</th>
+      <th>Message</th>
+      <th>PlusOnes<th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @guest.each do |guest| %>
+    <tr>
+      <td><%= t guest.status.class %></td>
+      <td><%= guest.name %></td>
+      <td><%= guest.message %></td>
+      <td><%= guest.plusones.map(&:name).join(',') %></td>
+      <td><%= link_to 'Delete', guest_path(guest), method: :delete, data: { confirm: 'Are you sure?'} %>
+          <%= link_to 'Show', guest_path(guest) %>
+      </td>
+    </tr>
+  <% end %>  
+  </tbody>
+</table>
+<div class="row">
+<div class="col-md-4 col-md-offset-2"><!-- Cubes -->
+      <div class="panel panel-default">
+        <div class="panel-body">
+        <h1>Header</h1>
+        <div class="field">
+      <%= simple_form_for :guest do |f| %>
+        <%= f.fields_for :detail do |detail_fields| %>
+        <%= render "detail_fields", :f => detail_fields %>
+        <% end %>
+        <%= f.button :submit %> 
+      <% end %>
+      </div>
+        </div>
+      </div>
+</div>
+<div class="col-md-6"><!-- Big Table -->
+<div class="panel panel-default">
+<div class="panel-body">
+<div class="table-responsive">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th class="table-responsive"></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+<% @guests = Guest.all %>
+<div class="row"><!-- cube start -->
+      <div class="col-sm-3 col-xs-3">
+        <span class="cube">
+        <p><%= @guests.where(status: true).count %></p>
+        <p>Accepted</p>
+        </span>
+      </div>
+      <div class="col-sm-3 col-xs-3">
+        <span class="cube">
+        <p><%= @guests.where(status: false).count %></p>
+        <p>Declined</p>
+        </span>
+      </div>
+      <div class="col-sm-3 col-xs-3">
+        <span class="cube">
+        <p><%= @plusone.count %></p>
+        <p>Additional</p>
+        </span>
+      </div>
+      <div class="col-sm-3 col-xs-3">
+        <span class="cube">
+        <p><%= @total %></p>
+        <p>Guests</p>
+        </span>
+      </div>
+    </div>
+  </div>
+
+<% @guests.each do |guesty| %>
+    <tr>
+  <td><span class="label bool"><%= t guesty.status.class %></span></td>
+  
+  <td><p>
+  <span><%= guesty.name %></span>
+  <span class="label label-default"><%= h guesty.plusones.map { |plus| plus.name }.join(',') %></span></p>
+  <p><em><%= guesty.message %></em></p></td>
+  <% guesty.plusones.each do |plus| %>
+
+  <% end %>
+  <td>
+  
+  <p><span class="label label-default"><%= pluralize(guesty.plusones.count, 'additional guest') %></span></p>
+  <p><span class="label label-info"><%= guesty.created_at.strftime("%b %d") %></span></p>
+  </td>
+
+  </tr>
+ 
+<% end %>
+
+</div>
+</div>
+</div>
+</tbody>
+</table>
+</div>
+</div><!-- close Big Table -->
