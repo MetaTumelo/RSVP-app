@@ -1,0 +1,4 @@
+<%= simple_form_for(@guest) do |f| %>
+<%= f.input :message, label: false, class: 'form-control input-sm', placeholder: 'Message' %>
+<%= f.button :submit, "Submit Changes" %>
+<% end %>

@@ -1,4 +1,6 @@
- <div class="col-md-2 col-md-offset-4">
+<% 
+=begin %>
+<div class="col-md-2 col-md-offset-4">
     <%= link_to 'New Guest', new_guest_path, id: "new_link", remote: true, class: "btn btn-default" %>
   </div>
 <div class="row">
@@ -32,6 +34,44 @@
   <% end %>  
   </tbody>
 </table>
+<%= paginate @pages %>
+<!-- Test AREA -->
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </div><!-- /btn-group -->
+      <input type="text" class="form-control" aria-label="...">
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control" aria-label="...">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </div><!-- /btn-group -->
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+
+
+<!-- TEST AREA -->
 <div class="row">
 <div class="col-md-4 col-md-offset-2"><!-- Cubes -->
       <div class="panel panel-default">
@@ -48,11 +88,47 @@
         </div>
       </div>
 </div>
+
+<%
+=end %>
+
+
 <div class="col-md-6"><!-- Big Table -->
 <div class="panel panel-default">
 <div class="panel-body">
-<div class="table-responsive">
-<table class="table table-hover">
+<!-- <%= link_to "CSV", guests_path(format: :csv) %> |
+  <%= link_to "Excel", guests_path(format: "axlsx") %> -->
+<% @guests = Guest.all %>
+<div class="row"><!-- cube start -->
+      <div class="col-sm-3 col-xs-3">
+        <span class="cube l-success">
+        <p><%= @guests.where(status: true).count %></p>
+        <p>Accepted</p>
+        </span>
+      </div>
+      <div class="col-sm-3 col-xs-3">
+        <span class="cube l-warning">
+        <p><%= @guests.where(status: false).count %></p>
+        <p>Declined</p>
+        </span>
+      </div>
+      <div class="col-sm-3 col-xs-3">
+        <span class="cube l-default">
+        <p><%= @plusone.count %></p>
+        <p>Additional</p>
+        </span>
+      </div>
+      <div class="col-sm-3 col-xs-3">
+        <span class="cube l-info">
+        <p><%= @total %></p>
+        <p>Attending</p>
+        </span>
+      </div>
+</div><!-- Cubes End -->
+  
+
+  <div class="table-responsive">
+<table id="news" class="table table-hover">
   <thead>
     <tr>
       <th></th>
@@ -62,60 +138,38 @@
   </thead>
   <tbody>
 
-<% @guests = Guest.all %>
-<div class="row"><!-- cube start -->
-      <div class="col-sm-3 col-xs-3">
-        <span class="cube">
-        <p><%= @guests.where(status: true).count %></p>
-        <p>Accepted</p>
-        </span>
-      </div>
-      <div class="col-sm-3 col-xs-3">
-        <span class="cube">
-        <p><%= @guests.where(status: false).count %></p>
-        <p>Declined</p>
-        </span>
-      </div>
-      <div class="col-sm-3 col-xs-3">
-        <span class="cube">
-        <p><%= @plusone.count %></p>
-        <p>Additional</p>
-        </span>
-      </div>
-      <div class="col-sm-3 col-xs-3">
-        <span class="cube">
-        <p><%= @total %></p>
-        <p>Guests</p>
-        </span>
-      </div>
-    </div>
-  </div>
-
-<% @guests.each do |guesty| %>
+<% @guests.each do |guest| %>
     <tr>
-  <td><span class="label bool"><%= t guesty.status.class %></span></td>
+  <td><span class="label bool"><%= t guest.status.class %></span></td>
   
-  <td><p>
-  <span><%= guesty.name %></span>
-  <span class="label label-default"><%= h guesty.plusones.map { |plus| plus.name }.join(',') %></span></p>
-  <p><em><%= guesty.message %></em></p></td>
-  <% guesty.plusones.each do |plus| %>
+  <td width="50%"><p>
+  <span><%= guest.name %></span>
+  <span class="label l-default"><%= h guest.plusones.map { |plus| plus.name }.join(',') %></span></p>
+  <p><em><%= guest.message %></em></p></td>
+  <% guest.plusones.each do |plus| %>
 
   <% end %>
   <td>
   
-  <p><span class="label label-default"><%= pluralize(guesty.plusones.count, 'additional guest') %></span></p>
-  <p><span class="label label-info"><%= guesty.created_at.strftime("%b %d") %></span></p>
+  <p><span class="label l-default"><%= pluralize(guest.plusones.count, 'additional guest') %></span></p>
+  <p><span class="label l-info"><%= guest.created_at.strftime("%b %d") %></span></p>
   </td>
-
+  <td><%= link_to guest, method: :delete, data: { confirm: 'Are you sure?'} do %>
+          <span class="glyphicon glyphicon-remove"></span>
+        <% end %>
+        <%= link_to edit_guest_path(guest) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
+  </td>
   </tr>
  
 <% end %>
 
-</div>
-</div>
-</div>
 </tbody>
 </table>
+  
 </div>
+<div id="news-paginator">
+
+</div><!-- paginator end -->
 </div><!-- close Big Table -->

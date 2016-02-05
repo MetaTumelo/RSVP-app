@@ -5,6 +5,9 @@ source 'http://rubygems.org'
 gem 'rails', '4.1.8'
 gem 'pg', '~> 0.18.1'
 gem 'sass-rails', '~> 4.0.3'
+gem 'bootstrap-material-design', '~> 0.2.2'
+gem 'kaminari'
+gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'cocoon', '~> 1.2.6'
@@ -18,6 +21,10 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'devise', '~> 3.4.1'
 gem 'apartment', '~> 0.26.1'
 gem 'bootstrap-sass', '~> 3.3.3'
-gem 'axlsx', '~> 2.0.1'
+gem 'axlsx'
+gem 'axlsx_rails'
 gem 'simple_form', '~> 3.1.0'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
+group :development do
+  gem "better_errors"
+end

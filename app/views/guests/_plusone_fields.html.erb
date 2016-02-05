@@ -1,11 +1,11 @@
 <div class=" clearfix">
   <div class="nested-fields">
     <div class="field">
-      <div class="input-group">
+      <div class="">
         <%= f.input :name, label: false  do %>
-        <span class="input-group-btn"><%= f.input_field :name, placeholder: 'First Name', class: "form-control" %>
-        <%= f.select(:oldness, options_for_select([[:Adult],[:Child]]),{}, {class: "btn"}) %>
-        <%= link_to_remove_association "Delete Additional Guest", f, class: "btn btn-default form-control" %></span>
+        <%= f.input_field :name, placeholder: 'First Name', class: "form-control" %><span class="">
+        <%= f.select(:oldness, options_for_select([[:Adult],[:Child]]),{}, {class: "btn btn-xs btn-default"}) %></span>
+        <%= link_to_remove_association "Delete Additional Guest", f, class: "btn btn-xs btn-warning" %>
         <% end %>
       </div>
       

@@ -1,6 +1,3 @@
-body {
-  padding-top: 20px;
-}
 
 #flash_notice {
   @extend .alert;
@@ -14,10 +11,31 @@ body {
   @extend .alert;
   @extend .alert-warning;
 }
+.centered {
+  text-align: center;
+}
+.navbar {
+    min-height: 60px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+}
+.navbar-white {
+  background-color: #fff;
+  border-color: #e7e7e7;
+}
 
 .navbar .right-buttons {
   margin-right: 15px;
   margin-left: 25px;
+}
+.hero-image {
+  background: url("invitted-hero.png") no-repeat;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+
+  background-size: contain;
+  max-width: 100%;
+  height: 620px;
 }
 .img-container {
   text-align: center;
@@ -43,20 +61,9 @@ span label {
 .panel {
 box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
-.label-default {
-  background-color: #7e57c2;
-}
-.label-success {
-  background-color: #4caf50;
-}
-.label-info {
-  background-color: #039be5;
-}
-.label-warning {
-  background-color: #f44336;
-}
+
 .cube {
-    background: none repeat scroll 0 0 #009688;
+    background: none repeat scroll 0 0;
     border-radius: 4px;
     display: block;
     height: 80px;
@@ -78,4 +85,64 @@ box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     text-align: center;
     width: 330px;
     color: #fff;
+}
+.klein {
+  width: 60px;
+}
+
+.h-hero {
+  background-color: #fff;
+}
+
+.h-hero-container {
+  padding-top: 20px;
+  padding-bottom: 80px;
+  overflow: hidden;
+}
+
+.how {
+  background-color: #0ea29d;
+}
+.steps {
+  padding-top: 50px;
+}
+
+.steps-rows {
+  padding-bottom: 30px;
+}
+
+.steps-num {
+  color: #caf9f8;
+  font-size: 200%;
+}
+
+.steps-elabor8 {
+  color: #fff;
+}
+
+
+$default: #7e57c2;
+$success: #00b386;
+$info: #039be5;
+$warning: #f56256;
+
+.intro {
+  color: $default;
+  font-family: "calibri";
+}
+
+.l-default {
+  background-color: $default;
+}
+.l-success {
+  background-color: $success;
+}
+.l-info {
+  background-color: $info;
+}
+.l-warning {
+  background-color: $warning;
+}
+.partial-inline {
+  margin-bottom: 20px !important;
 }

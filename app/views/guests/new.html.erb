@@ -31,14 +31,14 @@
   <% end %>
 
   <div class="links">
-   <%= link_to_add_association 'Add another guest', f, :plusones, class: "btn btn-default btn-sm add-button" %>
+   <%= link_to_add_association 'Add another guest', f, :plusones, class: "btn btn-primary btn-xs add-button" %>
   </div>
 
   <div class="field">
   <%= f.input :message, label: false, class: 'form-control input-sm', placeholder: 'Message' %>
   </div>
   <div class="actions">
-  <%= f.button :submit %>
+  <%= f.button :submit, "Submit RSVP" %>
   </div>
 <% end %>
 </div>

@@ -1,4 +1,4 @@
 $(document).ready(function () {
-$('span:contains("Accepted")').closest(".bool").addClass("label-success");
-$('span:contains("Declined")').closest(".bool").addClass("label-danger");
+$('span:contains("Accepted")').closest(".bool").addClass("l-success");
+$('span:contains("Declined")').closest(".bool").addClass("l-warning");
 });

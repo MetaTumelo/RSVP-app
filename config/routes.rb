@@ -15,11 +15,13 @@ Rsvp::Application.routes.draw do
     root 'guests#new', as: :subdomain_root
     resources :guests
     devise_for :users
+    get "/:page" => "guests#thanks"
   end
   
   constraints(SubdomainBlank) do
     root 'welcome#index'
     
     resources :accounts, only: [:new, :create]
+    
   end
 end

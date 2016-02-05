@@ -1,13 +1,18 @@
 <div class="col-md-6 col-md-offset-3 panel panel-default">
 	<div class="panel-body">
-		<h2>Create an Account</h2>
+		<h2>Create Your Account</h2>
 
 		<%= simple_form_for @account do |f| %>
 			<%= f.fields_for :owner do |o| %>
-				<%= o.input :name %>
-				<%= o.input :email %>
-				<%= o.input :password %>
-				<%= o.input :password_confirmation %>
+			<div class="form-inline">
+				<div class="form-group partial-inline">
+					<%= o.input :name, label: false, placeholder: 'Bride or Groom Name', class: 'form-control' %>
+					<%= o.input :name2, label: false, placeholder: 'Bride or Groom Name', class: 'form-control' %>
+				</div>
+			</div>
+				<%= o.input :email, label: false, placeholder: 'Email' %>
+				<%= o.input :password, label: false, placeholder: 'Password' %>
+				<%= o.input :password_confirmation, label: false, placeholder: 'Password_confirmation' %>
 			<% end %>
 			<%= f.input :subdomain do %>
 				<div class="input-group">

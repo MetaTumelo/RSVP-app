@@ -20,5 +20,5 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require pickers
-//= require_tree .
-
+//= require_tree
+//= require bootstrap-material-design

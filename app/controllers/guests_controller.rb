@@ -1,18 +1,29 @@
 class GuestsController < ApplicationController
-skip_before_filter :authenticate_user!, only: [:new, :create]
+skip_before_filter :authenticate_user!, only: [:new, :create, :thanks]
 
   def index
-    @guest = Guest.all
-    @plusone = Plusone.all
+    @guest = Guest.order("created_at ASC").all
+    @plusone = Plusone.order("created_at ASC").all
 
-    @all_guest = @guest.count
-    @all_additional = @plusone.count
-    @decline = @guest.where(status: false).count
-    @total = @all_guest + @all_additional - @decline
+      @all_guest = @guest.count
+      @all_additional = @plusone.count
+      @decline = @guest.where(status: false).count
+      @total = @all_guest + @all_additional - @decline
+
+     respond_to do |format|
+       format.html
+       format.json
+       format.js
+    end
+
   end
 
   def new
     @guest = Guest.new
+  end
+
+  def thanks
+    render params[:page]
   end
 
   def show
@@ -23,7 +34,7 @@ skip_before_filter :authenticate_user!, only: [:new, :create]
     @guest = Guest.new(guest_params)
     if @guest.save
       respond_to do |format|
-        format.html { redirect_to :back, notice: 'Thank you for replying' }
+        format.html { redirect_to "/thanks" }
         format.js
       end
     else
@@ -31,6 +42,20 @@ skip_before_filter :authenticate_user!, only: [:new, :create]
         format.html { render :new }
         format.js
       end
+    end
+  end
+
+  def edit
+    @guest = Guest.find(params[:id])
+  end
+
+  def update
+    @guest = Guest.find(params[:id])
+    if @guest.update_attributes(guest_params)
+      flash[:success] = "profile updated"
+      redirect_to @guest
+    else
+      render 'edit'
     end
   end
 
